@@ -1,0 +1,69 @@
+# Jenkins starting
+- Installing packages
+  ---
+    become: yes
+  - name: Installing java is mandatory
+    apt:
+      openjdk-11-jdk -y
+    update_cache: yes
+  - name: checking java version
+    apt:
+       java -version
+  --------------------------------------
+  #commands to install Jenkins on ubuntu 22.04
+  - name: install java packages
+    sudo apt update
+    sudo apt-cache search openjdk #to find the java packages
+    sudo apt install openjdk-11-jdk -y
+    java -version
+    
+  - name: install jenkins lts
+    curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+    echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install jenkins -y
+    sudo cat /etc/passwd #Jenkins user is created home directory of this uesr is /var/lib/Jenkins |
+    #jenkins:x:115:122:Jenkins,,,:/var/lib/jenkins:/bin/bash - output
+    
+  - name: explanation of commands
+    curl: This is a command-line tool for making network requests. In this context, it's used to download a file from a URL
+    -fsSL: These are options passed to the curl command:
+    -f: Fail silently (i.e., don't show error messages).
+    -s: Silent mode (don't show progress or error messages).
+    -S: Show errors if they occur.
+    -L: Follow redirects (if the URL responds with a redirect, curl will follow it to the final destination).
+    -|: This is a pipe symbol. It's used to pass the output of the curl command to the next command in the pipeline. |
+    URL from which curl it's downloading a GPG (GNU Privacy Guard) key from the Jenkins repository
+    -sudo: to run the tee command with elevated privileges. tee is a command that reads from standard input and writes to one or more files.
+  
+  - name: next line
+    - deb: indicates that this is a Debian package repository. |
+    So, when you run this command, you're essentially creating a configuration file (jenkins.list) in the /etc/apt/sources.list.d/ directory | 
+    that specifies the Jenkins package repository and its associated GPG key for package verification.
+    
+  - name: jenkins core concepts
+    command:
+      sudo -i : to become root user
+      su jenkins : switch yourself as jenkins user
+      cd ~ : go to home directory
+      usermod --shell /bin/bash jenkins :  "jenkins" user will have /bin/bash as its default shell, |
+      they will be using the Bash shell for command-line interactions
+
+  - name: permission to jenkin user
+    command:
+      visudo : allow members of group sudo to execute any command |
+      jenkins ALL=(ALL:ALL) NOPASSWD:ALL 
+      set : gives all environment variables available
+      sudo apt install tree -y: installing tree to explore directory structure <in ubuntu>
+      sudo yum install tree -y : <in rehat machine>
+      ls -al : list of all directories present
+
+  - name: build for java
+    command:
+      sudo apt-cache madison maven: see a list of available versions of the "maven" package, along with details about each version.
+      java -version mvn --version git --version: checking versions
+      
+      
