@@ -66,4 +66,42 @@
       sudo apt-cache madison maven: see a list of available versions of the "maven" package, along with details about each version.
       java -version mvn --version git --version: checking versions
       
+- Installing plugins
+  - name : plugins
+    available:
+      - .jpi (jenkin plugins interface)
+      - .hpi (hudson plugins interface)
+    list:
+      subversion
+      Periodic backup manager
+      Configure global security
+  - name: Periodic backup manager options
+    list:
+      Temporary directory
+      backup schedule - from cron website
+      Max backup in location
+      Store no older than (days)
+      File management strategy - Config only && Full backup
+      Storage strategy - TarGzStorage
+      Backup location => Add loaction => Backup directory path
+  - name: Config global Security
+    list: //Manage => Security => CGS - Security Realm = Authentication methods
+      delegate to servlet container
+      jenkins own user database
+      LDAP
+      Unix user/group database
+  - name: new user creates a option people => CGS => Authorization
+    list:
+      anyone can do anything
+      Matrix-based security
+      Project based matrix authorization strategy
+  - name: types of pipeline
+    list:
+      scripted pipeline
+      declerative pipeline
+  - name: 
+
+      
+
+
       
